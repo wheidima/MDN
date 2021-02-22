@@ -164,13 +164,16 @@ if __name__ == '__main__':
 	K.set_value(custom_vgg_model.optimizer.learning_rate, 0.00001)
 	custom_vgg_model.fit_generator(generator(),samples_per_epoch=1000,validation_data=val_generator(),validation_steps=10,epochs=1)
 
-	#--Here you read the label
-	Y=readCSV(dirLabelsTest+'_Depression.csv')
+	# Verify the prediction for a clip
+	#users = 
+	#--Here you read the label for the 'users'
+	Y=readCSV(dirLabelsTest+users+'_Depression.csv')
 	buf=0
 	numberOfFrames = NUM_FRAMES #
+	#img = read the images from the users folder
 	while (buf < numberOfFrames):
 		#Insert here the directory of the images of test set
-		imagem = image.load_img(dirTesting,target_size=(FRAME_HEIGHT,FRAME_WIDTH))
+		imagem = image.load_img(dirTesting+users+img[buf],target_size=(FRAME_HEIGHT,FRAME_WIDTH))
 		imagem = image.img_to_array(imagem)
 		#Subtract the mean of VGGFace2 dataset
 		#---put your function here
