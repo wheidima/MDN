@@ -165,21 +165,21 @@ if __name__ == '__main__':
 	custom_vgg_model.fit_generator(generator(),samples_per_epoch=1000,validation_data=val_generator(),validation_steps=10,epochs=1)
 
 	# Verify the prediction for a clip
-	#users = 
+	users = dirTesting+dirTest[0]+'/203_2/'
 	#--Here you read the label for the 'users'
-	Y=readCSV(dirLabelsTest+users+'_Depression.csv')
+	Y=readCSV(dirLabelsTest+'203_2'+'_Depression.csv')
 	buf=0
 	numberOfFrames = NUM_FRAMES #
 	#img = read the images from the users folder
-	while (buf < numberOfFrames):
-		#Insert here the directory of the images of test set
-		imagem = image.load_img(dirTesting+users+img[buf],target_size=(FRAME_HEIGHT,FRAME_WIDTH))
+	img = wsort(users) #all the images
+	while (buf < numberOfFrames*4):
+		imagem = image.load_img(users+img[buf],target_size=(FRAME_HEIGHT,FRAME_WIDTH))
 		imagem = image.img_to_array(imagem)
 		#Subtract the mean of VGGFace2 dataset
 		#---put your function here
 		imga = utils.preprocess_input(imagem,version=2) #here it is the mean value of VGGFace dataset
 		X.append(imga)
-		buf = buf + 1
+		buf = buf + 4
 	X = np.array(X)
 	X = np.expand_dims(X,axis=0)
 	prediction = custom_vgg_model.predict(X)
