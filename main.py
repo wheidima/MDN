@@ -176,6 +176,7 @@ if __name__ == '__main__':
 		#---put your function here
 		imga = utils.preprocess_input(imagem,version=2) #here it is the mean value of VGGFace dataset
 		X.append(imga)
+		buf = buf + 1
 	X = np.array(X)
 	X = np.expand_dims(X,axis=0)
 	prediction = custom_vgg_model.predict(X)
